@@ -1,0 +1,14 @@
+{
+  "aliases": {
+    "pricing": ["price", "prices", "cost", "billing", "plan"],
+    "credits": ["credit", "credits", "allowance", "balance"],
+    "byok": ["own-key", "provider-key", "bring-your-own-key"],
+    "auth": ["authentication", "authorization", "login", "sign-in"],
+    "install": ["installation", "setup", "installer"],
+    "config": ["configuration", "settings", "option"],
+    "extension": ["vscode", "vs-code", "plugin"],
+    "refund": ["refunds", "cancellation", "cancel"],
+    "limits": ["limit", "quota", "cap", "rate-limit"],
+    "models": ["model", "model-id", "llm"]
+  }
+}

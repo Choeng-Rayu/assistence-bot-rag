@@ -1,0 +1,44 @@
+# Frozen documentation corpus
+
+This directory holds the frozen Markdown corpus used by the RayuCode RAG
+support assistant.
+
+- Source repository: `Choeng-Rayu/rayu-web`
+- Source commit: `486bab47797719a893e6aae9b9363460cd7f9cce`
+- Copied date: `2026-11-10`
+- Source directory: `public/docs/`
+
+## Files
+
+The 14 authoritative documents are:
+
+```
+01-installation.md
+02-quickstart.md
+03-providers.md
+04-models.md
+05-configuration.md
+06-cli-reference.md
+07-slash-commands.md
+10-troubleshooting.md
+15-api-keys.md
+17-vscode-extension.md
+18-subscription-plans.md
+19-credits-and-limits.md
+20-how-token-credit-charge.md
+21-policies.md
+```
+
+`README.md` and `CHANGELOG.md` from the source repository were deliberately
+excluded: this repository owns its own README, and the changelog is not part of
+the support-docs corpus.
+
+## Freeze policy
+
+These files are **frozen**. Do not edit, reformat, or delete them. Any corpus
+change must be a deliberate re-copy from a new pinned `rayu-web` commit, with
+the source commit updated in this file and a fresh `prepare` + `verify` run so
+the manifest hashes and the index `corpus_version` change together.
+
+This README is intentionally named without a `.md` extension so that
+`ls data/docs/*.md | wc -l` reports exactly the 14 corpus documents.
