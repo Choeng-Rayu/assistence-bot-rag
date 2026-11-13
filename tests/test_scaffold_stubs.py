@@ -45,13 +45,8 @@ SUBPACKAGES = (
     "rayu_rag.evaluation",
 )
 
-#: One representative stub per package: (callable, args, expected owner).
+#: Representative stubs that should still raise ``NotImplementedError``.
 REPRESENTATIVE_STUBS = (
-    (
-        "indexing",
-        lambda: __import__("rayu_rag.indexing", fromlist=["normalize"]).normalize("x"),
-        "Somnang",
-    ),
     (
         "ranking",
         lambda: __import__("rayu_rag.ranking", fromlist=["build_ranker"]).build_ranker("keyword"),
