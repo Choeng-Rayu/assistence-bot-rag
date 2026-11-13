@@ -45,7 +45,8 @@ SUBPACKAGES = (
     "rayu_rag.evaluation",
 )
 
-#: Representative stubs that should still raise ``NotImplementedError``.
+#: One representative stub per package: (callable, args, expected owner).
+# NOTE: indexing is fully implemented (Somnang P2 complete) — removed from stubs list.
 REPRESENTATIVE_STUBS = (
     (
         "ranking",
