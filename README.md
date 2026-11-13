@@ -83,14 +83,14 @@ owner. Do not edit another member's files; report interface problems instead.
 
 ### Nike — corpus
 
-- [ ] `corpus/chunker.py`: GitHub heading slugify, ATX headings outside fences,
+- [x] `corpus/chunker.py`: GitHub heading slugify, ATX headings outside fences,
       H1 + intro preamble, ≤1,800-char line-boundary splits, `x`/`x-1` de-dup,
       chunk ids `<slug>`, `<slug>#<heading>`, `<slug>#<heading>~2`.
-- [ ] `corpus/prepare.py`: read `data/docs/*.md`, chunk, write
+- [x] `corpus/prepare.py`: read `data/docs/*.md`, chunk, write
       `documents.jsonl` + `chunks.jsonl` deterministically.
-- [ ] `corpus/manifest.py`: provenance + per-file SHA-256; `verify_manifest`
+- [x] `corpus/manifest.py`: provenance + per-file SHA-256; `verify_manifest`
       returns `[]` when valid.
-- [ ] Add chunk-id stability and manifest tests.
+- [x] Add chunk-id stability and manifest tests.
 
 ### Somnang — indexing
 

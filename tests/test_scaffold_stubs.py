@@ -47,7 +47,6 @@ SUBPACKAGES = (
 
 #: One representative stub per package: (callable, args, expected owner).
 REPRESENTATIVE_STUBS = (
-    ("corpus", lambda: __import__("rayu_rag.corpus", fromlist=["slugify"]).slugify("x"), "Nike"),
     (
         "indexing",
         lambda: __import__("rayu_rag.indexing", fromlist=["normalize"]).normalize("x"),
