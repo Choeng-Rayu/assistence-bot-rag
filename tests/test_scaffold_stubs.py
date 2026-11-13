@@ -46,12 +46,8 @@ SUBPACKAGES = (
 )
 
 #: One representative stub per package: (callable, args, expected owner).
+# NOTE: indexing is fully implemented (Somnang P2 complete) — removed from stubs list.
 REPRESENTATIVE_STUBS = (
-    (
-        "indexing",
-        lambda: __import__("rayu_rag.indexing", fromlist=["normalize"]).normalize("x"),
-        "Somnang",
-    ),
     (
         "ranking",
         lambda: __import__("rayu_rag.ranking", fromlist=["build_ranker"]).build_ranker("keyword"),
