@@ -5,7 +5,11 @@ Owner: Tanchhay.
 
 from __future__ import annotations
 
+import math
+
 from ..contracts import LoadedIndex, ScoredChunk
+from ..indexing.tokenizer import tokenize
+from ._util import finalize
 
 __all__ = ["BM25Ranker"]
 
@@ -34,10 +38,35 @@ class BM25Ranker:
     def rank(self, query: str, index: LoadedIndex, k: int = 10) -> list[ScoredChunk]:
         """Return the top *k* chunks by BM25 score.
 
-        ``components["bm25"]`` holds the score; term-level contributions may be
-        added for debugging.
-
-        TODO(Tanchhay): implement BM25 scoring.
+        ``components["bm25"]`` holds the score; term-level contributions are
+        recorded as ``term:<term>``.
         """
 
-        raise NotImplementedError("TODO(Tanchhay): implement BM25Ranker.rank")
+        artifact = index.artifact
+        n = artifact.chunk_count
+        if n == 0:
+            return []
+        avgdl = artifact.avgdl or 1.0
+
+        scores: dict[str, float] = {}
+        parts: dict[str, dict[str, float]] = {}
+        for term in tokenize(query, for_query=True):
+            plist = artifact.postings.get(term)
+            if not plist:
+                continue
+            df = len(plist)
+            idf = math.log((n - df + 0.5) / (df + 0.5) + 1.0)
+            for posting in plist:
+                dl = artifact.doc_lengths.get(posting.chunk_id, 0)
+                norm = self.k1 * (1.0 - self.b + self.b * dl / avgdl)
+                contribution = idf * posting.tf * (self.k1 + 1.0) / (posting.tf + norm)
+                scores[posting.chunk_id] = scores.get(posting.chunk_id, 0.0) + contribution
+                parts.setdefault(posting.chunk_id, {})[f"term:{term}"] = contribution
+
+        rows = []
+        for chunk_id, score in scores.items():
+            chunk = index.by_id.get(chunk_id)
+            if chunk is None:
+                continue
+            rows.append((chunk, score, {"bm25": score, **parts[chunk_id]}))
+        return finalize(rows, k)

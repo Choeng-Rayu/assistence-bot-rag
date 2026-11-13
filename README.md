@@ -107,13 +107,15 @@ owner. Do not edit another member's files; report interface problems instead.
 
 ### Tanchhay — ranking and evaluation
 
-- [ ] `ranking/keyword.py`: exact port of `scoreSection()` (constants fixed in
+- [x] `ranking/keyword.py`: exact port of `scoreSection()` (constants fixed in
       the module docstring).
-- [ ] `ranking/tfidf.py`, `bm25.py`, `fusion.py`: baselines and the production
+- [x] `ranking/tfidf.py`, `bm25.py`, `fusion.py`: baselines and the production
       candidate; tune `k1`/`b`/`alpha` on the dev split only.
-- [ ] `ranking/retrieve.py`: k and character budget, refusal, fallback.
-- [ ] `evaluation/*`: metrics, bootstrap CI, κ, pooling, harness, report.
-- [ ] Add seed queries/qrels under `eval/`, then run `eval --split dev`.
+- [x] `ranking/retrieve.py`: k and character budget, refusal, fallback.
+- [x] `evaluation/*`: metrics, bootstrap CI, κ, pooling, harness, report.
+- [x] Add seed queries/qrels under `eval/`, then run `eval --split dev`.
+      Tuned on dev only: BM25 `k1=1.2, b=0.75` (grid optimum), fusion `alpha=0.5`
+      (`python scripts/tune_rankers.py`). Eval set: 60 queries (40 dev / 20 test) in `eval/`.
 
 ### Reach — RAG and API
 
