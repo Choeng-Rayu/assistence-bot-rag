@@ -46,26 +46,14 @@ SUBPACKAGES = (
 )
 
 #: One representative stub per package: (callable, args, expected owner).
-# NOTE: indexing is fully implemented (Somnang P2 complete) — removed from stubs list.
+# NOTE: indexing (Somnang), ranking and evaluation (Tanchhay) are implemented.
 REPRESENTATIVE_STUBS = (
-    (
-        "ranking",
-        lambda: __import__("rayu_rag.ranking", fromlist=["build_ranker"]).build_ranker("keyword"),
-        "Tanchhay",
-    ),
     (
         "rag",
         lambda: __import__("rayu_rag.rag", fromlist=["build_messages"]).build_messages((), ()),
         "Reach",
     ),
     ("api", lambda: __import__("rayu_rag.api", fromlist=["create_app"]).create_app(), "Reach"),
-    (
-        "evaluation",
-        lambda: __import__("rayu_rag.evaluation", fromlist=["precision_at_k"]).precision_at_k(
-            [], set(), 1
-        ),
-        "Tanchhay",
-    ),
 )
 
 
@@ -122,11 +110,12 @@ def test_every_not_implemented_error_is_owner_tagged() -> None:
             )
             tagged += 1
 
-    assert tagged >= len(SUBPACKAGES) * 3, "expected many owner-tagged stubs"
+    assert tagged >= 10, "expected many owner-tagged stubs"
 
 
 def test_each_subpackage_has_owner_tagged_stubs() -> None:
-    for package in SUBPACKAGES:
+    # Only rag and api (Reach) still carry stubs.
+    for package in ("rayu_rag.rag", "rayu_rag.api"):
         directory = SRC_ROOT / package.rsplit(".", 1)[-1]
         text = "\n".join(
             path.read_text(encoding="utf-8") for path in sorted(directory.rglob("*.py"))

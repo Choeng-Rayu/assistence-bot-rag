@@ -97,6 +97,13 @@ def load_index(index_dir: Path) -> LoadedIndex:
     data = read_json(index_path)
     artifact = _artifact_from_dict(data)
 
+    # write_index only persists index.json; fall back to the sibling corpus
+    # artifact (artifacts/corpus/chunks.jsonl) when chunks.jsonl is absent.
+    if not chunks_path.exists():
+        sibling = index_dir.parent / "corpus" / "chunks.jsonl"
+        if sibling.exists():
+            chunks_path = sibling
+
     # Load chunks if available
     if chunks_path.exists():
         raw_chunks = read_jsonl(chunks_path)

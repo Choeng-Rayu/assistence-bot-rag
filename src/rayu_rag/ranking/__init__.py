@@ -1,7 +1,6 @@
 """Rankers and the shared retrieval pipeline.
 
-Owner: Tanchhay. Every algorithm in this package is a scaffold stub that raises
-:class:`NotImplementedError` with a ``TODO(Tanchhay)`` message until P3/P4 land.
+Owner: Tanchhay. Implemented: keyword, TF-IDF, BM25 and fusion rankers plus ``retrieve``.
 """
 
 from __future__ import annotations

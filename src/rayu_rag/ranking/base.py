@@ -16,12 +16,23 @@ def build_ranker(name: str) -> Ranker:
     Known names: ``keyword`` (:class:`~rayu_rag.ranking.keyword.KeywordRanker`),
     ``tfidf`` (:class:`~rayu_rag.ranking.tfidf.TfidfRanker`), ``bm25``
     (:class:`~rayu_rag.ranking.bm25.BM25Ranker`) and ``fusion``
-    (:class:`~rayu_rag.ranking.fusion.FusionRanker`).
+    (:class:`~rayu_rag.ranking.fusion.FusionRanker`, BM25 primary).
 
-    An unknown name must raise :class:`NotImplementedError` (the scaffold has no
-    working rankers yet, so this raises for every name for now).
-
-    TODO(Tanchhay): implement the ranker registry and construction.
+    An unknown name raises :class:`ValueError`.
     """
 
-    raise NotImplementedError("TODO(Tanchhay): implement build_ranker")
+    from .bm25 import BM25Ranker
+    from .fusion import FusionRanker
+    from .keyword import KeywordRanker
+    from .tfidf import TfidfRanker
+
+    key = name.strip().lower()
+    if key == "keyword":
+        return KeywordRanker()
+    if key == "tfidf":
+        return TfidfRanker()
+    if key == "bm25":
+        return BM25Ranker()
+    if key == "fusion":
+        return FusionRanker(BM25Ranker())
+    raise ValueError(f"unknown ranker {name!r}; expected keyword, tfidf, bm25 or fusion")

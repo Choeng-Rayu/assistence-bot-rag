@@ -1,8 +1,6 @@
 """Evaluation harness: metrics, bootstrap CIs, agreement, pooling, reports.
 
-Owner: Tanchhay. Every metric/algorithm is a scaffold stub that raises
-:class:`NotImplementedError` with a ``TODO(Tanchhay)`` message until P3/P4
-land. ``RANKERS`` is implemented data.
+Owner: Tanchhay. Metrics, bootstrap CIs, kappa, pooling, harness and reports are implemented.
 """
 
 from __future__ import annotations
