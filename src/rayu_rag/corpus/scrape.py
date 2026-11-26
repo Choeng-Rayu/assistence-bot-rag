@@ -11,7 +11,7 @@ import httpx
 from bs4 import BeautifulSoup
 from markdownify import markdownify as md
 
-START_URL = "[https://rayucode.com/docs](https://rayucode.com/docs)"
+START_URL = "https://rayucode.com/docs"
 ALLOWED_NETLOC = "rayucode.com"
 ALLOWED_PATH_PREFIX = "/docs"
 DOCS_DIR = Path("data/docs")
